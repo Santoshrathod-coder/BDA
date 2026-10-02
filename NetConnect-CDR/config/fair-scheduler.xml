@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  NetConnect CDR Analysis Project
+  YARN Fair Scheduler Allocation Configuration
+-->
+<allocations>
+
+  <!-- Root Queue Definition -->
+  <queue name="root">
+    
+    <!-- General Purpose Queue -->
+    <queue name="default">
+      <weight>1.0</weight>
+      <minResources>1024 mb, 1 vcores</minResources>
+      <maxResources>4096 mb, 2 vcores</maxResources>
+      <schedulingPolicy>fair</schedulingPolicy>
+      <aclSubmitApps>*</aclSubmitApps>
+    </queue>
+
+    <!-- Dedicated NetConnect CDR Analytics Queue -->
+    <queue name="telecom_analytics">
+      <!-- Weight 2.5 gives 2.5x more share than default when contending -->
+      <weight>2.5</weight>
+      <minResources>2048 mb, 2 vcores</minResources>
+      <maxResources>8192 mb, 4 vcores</maxResources>
+      <maxRunningApps>10</maxRunningApps>
+      <schedulingPolicy>fair</schedulingPolicy>
+      <aclSubmitApps>*</aclSubmitApps>
+      <aclAdministerApps>*</aclAdministerApps>
+    </queue>
+
+  </queue>
+
+  <!-- Maximum share of cluster resources any queue's ApplicationMasters can take -->
+  <queueMaxAMShareDefault>0.5</queueMaxAMShareDefault>
+
+  <!-- Default scheduling policy across all queues: fair sharing -->
+  <defaultQueueSchedulingPolicy>fair</defaultQueueSchedulingPolicy>
+
+  <!-- Queue placement policy -->
+  <queuePlacementPolicy>
+    <rule name="specified" create="false" />
+    <rule name="default" queue="default" />
+  </queuePlacementPolicy>
+
+</allocations>

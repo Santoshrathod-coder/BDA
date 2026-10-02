@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<!--
+  NetConnect CDR Analysis Project
+  YARN Capacity Scheduler Configuration
+-->
+<configuration>
+
+  <!-- Maximum percentage of cluster resources that can be used by ApplicationMasters -->
+  <property>
+    <name>yarn.scheduler.capacity.maximum-am-resource-percent</name>
+    <value>0.25</value>
+    <description>Maximum percent of resources for Application Masters</description>
+  </property>
+
+  <!-- Maximum application lifetime in seconds (0 = disabled) -->
+  <property>
+    <name>yarn.scheduler.capacity.maximum-applications</name>
+    <value>10000</value>
+  </property>
+
+  <!-- Define Queues under root -->
+  <property>
+    <name>yarn.scheduler.capacity.root.queues</name>
+    <value>default,telecom_analytics</value>
+    <description>Queues defined under root for NetConnect workloads</description>
+  </property>
+
+  <!-- Root Queue Capacity -->
+  <property>
+    <name>yarn.scheduler.capacity.root.capacity</name>
+    <value>100</value>
+  </property>
+
+  <!-- Default Queue Settings (30% cluster capacity guaranteed) -->
+  <property>
+    <name>yarn.scheduler.capacity.root.default.capacity</name>
+    <value>30</value>
+    <description>30% guaranteed cluster capacity for general jobs</description>
+  </property>
+
+  <property>
+    <name>yarn.scheduler.capacity.root.default.maximum-capacity</name>
+    <value>100</value>
+    <description>Elastic capacity: default queue can burst up to 100% when idle</description>
+  </property>
+
+  <property>
+    <name>yarn.scheduler.capacity.root.default.user-limit-factor</name>
+    <value>1</value>
+  </property>
+
+  <property>
+    <name>yarn.scheduler.capacity.root.default.state</name>
+    <value>RUNNING</value>
+  </property>
+
+  <!-- telecom_analytics Queue Settings (70% cluster capacity guaranteed) -->
+  <property>
+    <name>yarn.scheduler.capacity.root.telecom_analytics.capacity</name>
+    <value>70</value>
+    <description>70% guaranteed cluster capacity for NetConnect CDR jobs</description>
+  </property>
+
+  <property>
+    <name>yarn.scheduler.capacity.root.telecom_analytics.maximum-capacity</name>
+    <value>100</value>
+    <description>Can burst to 100% if default queue has no active tasks</description>
+  </property>
+
+  <property>
+    <name>yarn.scheduler.capacity.root.telecom_analytics.user-limit-factor</name>
+    <value>1</value>
+  </property>
+
+  <property>
+    <name>yarn.scheduler.capacity.root.telecom_analytics.state</name>
+    <value>RUNNING</value>
+  </property>
+
+  <property>
+    <name>yarn.scheduler.capacity.root.telecom_analytics.acl_submit_applications</name>
+    <value>*</value>
+    <description>Allow all users to submit CDR analytics jobs</description>
+  </property>
+
+  <property>
+    <name>yarn.scheduler.capacity.root.telecom_analytics.acl_administer_queue</name>
+    <value>*</value>
+  </property>
+
+</configuration>
